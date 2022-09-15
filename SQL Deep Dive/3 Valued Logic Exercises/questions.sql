@@ -4,8 +4,7 @@
 * Table: customers
 * Question: adjust the following query to display the null values as "No Address"
 */
-SELECT address2 
-FROM customers
+select coalesce(address2, 'No Address') from customers
 
 /*
 * DB: Store
@@ -13,9 +12,8 @@ FROM customers
 * Question: Fix the following query to apply proper 3VL
 */
 
-SELECT *
-FROM customers
-WHERE COALESCE(address2, null) IS NOT null;
+select * from customers
+where address2 is not null
 
 /*
 * DB: Store
@@ -24,4 +22,4 @@ WHERE COALESCE(address2, null) IS NOT null;
 */
 
 SELECT coalesce(lastName, 'Empty'), * from customers
-where (age = null);
+where (age is null);
