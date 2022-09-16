@@ -13,7 +13,8 @@ SELECT ..., EXTRACT (YEAR FROM AGE(birth_date)) as "age" FROM employees;
 * Table: employees
 * Question: How many people's name start with A and end with R?
 * Expected output: 1846
-*/
+*/select count(first_name) from employees
+where first_name ilike 'a%r'
 
                                                   
 /*
@@ -21,7 +22,8 @@ SELECT ..., EXTRACT (YEAR FROM AGE(birth_date)) as "age" FROM employees;
 * Table: customers
 * Question: How many people's zipcode have a 2 in it?.
 * Expected output: 4211 
-*/
+*/select count(zip) from customers
+where zip::text like  '%2%'
 
 
 
@@ -30,7 +32,8 @@ SELECT ..., EXTRACT (YEAR FROM AGE(birth_date)) as "age" FROM employees;
 * Table: customers
 * Question: How many people's zipcode start with 2 with the 3rd character being a 1.
 * Expected output: 109 
-*/
+*/select count(zip) from customers
+where zip::text like  '2_1%'
 
 
 /*
@@ -39,5 +42,6 @@ SELECT ..., EXTRACT (YEAR FROM AGE(birth_date)) as "age" FROM employees;
 * Question: Which states have phone numbers starting with 302?
 * Replace null values with "No State"                                                  
 * Expected output: https://imgur.com/AVe6G4c
-*/
+*/select coalesce(state, 'No State') as "State" from customers
+where phone:: text like '302%'
 
